@@ -4,20 +4,24 @@
           <li 
             v-for="(item, index) in categoryList" 
             :key="index"
+            :data-id='item.id'
             :class="{active:index == num}"
-            @click='toggleTab(index)'
+            @click='toggleTab(index);getDataId($event)' 
           >
             {{item.categoryName}}
         </li>
       </ul>
+
       <ul class="right">
-          <div 
+          <li 
             v-for="(item, index) in categoryContent" 
-            :key="index"
+            :key="index" 
             v-show="index == num"
           >
-            {{item}}
-          </div>
+            <!-- <img :src="imgUrl" alt="">  -->
+            <img :src="baseUrl+item.brandLogo" alt="">
+            <span>{{item.brandName}}</span>
+          </li>
       </ul>
     </div>
 </template>
@@ -28,23 +32,41 @@ export default {
     data () {
         return {
             categoryList: [],
-            categoryContent: ['运动馆','女士馆','男士馆','帆布馆','户外馆'],
-            num: 0
+            categoryContent: [],
+            num: 0,
+            id: 1,
+            baseUrl: 'http://localhost:3000',
+            imgUrl: ''
         }
     },
     methods: {
         toggleTab (index) {
             this.num = index;
+            this.$axios.get('/category/querySecondCategory?id='+this.id).then(response => {
+               this.categoryContent = response.data.rows;
+            })
+        },
+        getDataId (event) { // 通过自定属性获取id
+            this.id = event.target.dataset.id;
         }
     },
     created () {
+
+        // 请求一级菜单: 将一级菜单的id当做参数传递到二级菜单
         this.$axios.get('/category/queryTopCategory').then(response => {
-             console.log(response)
+            //  console.log(response)
              this.categoryList = response.data.rows;
+            //  id = response.data.rows[0].id;
+            //  console.log(id);
          })
 
-        this.$axios.get('/category/querySecondCategory',{id:1}).then(response => {
-             console.log(response);
+        // 请求二级菜单
+        this.$axios.get('/category/querySecondCategory?id='+this.id).then(response => {
+            //  console.log(response);
+            //  console.log(response.data.rows[1].brandLogo);
+            this.categoryContent = response.data.rows;
+            this.imgUrl = 'http://localhost:3000' + this.categoryContent[this.id].brandLogo;
+            // console.log(this.categoryContent)
         })
     }
 }
@@ -71,6 +93,20 @@ export default {
         > ul:last-of-type {
             flex: 1;
             padding: .1rem;
+            display: flex;
+            flex-wrap: wrap;
+            > li {
+                width: calc(100% / 3);
+                > img {
+                    width: 100%;
+                    display: block;
+                }
+                > span {
+                    display: inline-block;
+                    width: 100%;
+                    text-align: center;
+                }
+            }
         }
     }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <div class="home-content">
         <!-- 轮播图 -->
-        <swiper class="home-banner" :options="swiperOption" ref="mySwiper" @someSwiperEvent="callback">
+        <swiper class="home-banner" :options="swiperOption" ref="mySwiper">
             <!-- slides -->
             <swiper-slide>
                 <a href="javascript:;">

@@ -1,28 +1,28 @@
 <template>
     <ul class="home-footer">
         <li>
-            <a href="javascript:;">
+            <router-link to='/' class="router-link">
                 <i class="icon iconfont icon-shouye"></i>
                 <span>首页</span>
-            </a>
+            </router-link>
         </li>
         <li>
-            <a href="javascript:;">
+            <router-link to='/category' class="router-link">
                 <i class="icon iconfont icon-fenlei1"></i>
                 <span>分类</span>
-            </a>
+            </router-link>
         </li>
         <li>
-            <a href="javascript:;">
+            <router-link to='/shopcart' class="router-link">
                 <i class="icon iconfont icon-daohanggouwuche"></i>
                 <span>购物车</span>
-            </a>
+            </router-link>
         </li>
         <li>
-            <a href="javascript:;">
+            <router-link to='/login' class="router-link">
                 <i class="icon iconfont icon-huiyuanzhongxin1"></i>
                 <span>会员中心</span>
-            </a>
+            </router-link>
         </li>
     </ul>
 </template>
@@ -44,7 +44,7 @@ export default {
         display: flex;
         > li {
             width: 25%;
-            > a {
+            .router-link {
                 display: flex;
                 flex-direction: column;
                 text-align: center;

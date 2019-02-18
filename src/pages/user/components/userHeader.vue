@@ -1,14 +1,13 @@
 <template>
     <div class="category-header">
-        <i class="icon iconfont icon-2fanhui" @click="goBack"></i>
-        乐淘云购
-        <i class="icon iconfont icon-sousuokuang"></i>
+        <i class="icon iconfont icon-2fanhui" @tap='goBack'></i>
+        个人中心
     </div>
 </template>
 
 <script>
 export default {
-    name: 'homeHeader',
+    name: 'userHeader',
     methods: {
         goBack () {
             this.$router.go(-1);

@@ -1,8 +1,8 @@
 <template>
     <div class="category-header">
         <i class="icon iconfont icon-2fanhui" @click="goBack"></i>
-        乐淘云购
-        <i class="icon iconfont icon-sousuokuang"></i>
+        购物车
+        <i class="icon iconfont icon-shuaxin"></i>
     </div>
 </template>
 
@@ -36,7 +36,7 @@ export default {
             left: .2rem;
             font-size: .5rem;
         }
-        .icon-sousuokuang {
+        .icon-shuaxin {
             position: absolute;
             top: 0;
             right: .2rem;
